@@ -5,7 +5,7 @@ namespace TheGuessGame.Actions
     public class GuessHandler
     {
         public static Random rnd = new Random();
-        public Guesses NewGame()
+        public void NewGame()
         {
             int max = ConsoleIO.GetRequiredPositiveInt("Enter the maximum value for the guessing game: ");
             Guesses guess = new Guesses()
@@ -16,8 +16,7 @@ namespace TheGuessGame.Actions
                 LowGuesses = 0
             };
 
-            return guess;
-
+            ConsoleIO.StartGame(guess);
         }
 
         public int NewGuess(Guesses guess)

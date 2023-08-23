@@ -10,7 +10,7 @@ namespace TheGuessGame.Actions
             Console.WriteLine("Welcome to the Guessing Game!");
         }
 
-        public static void Hhey(Guesses guess)
+        public static void StartGame(Guesses guess)
         {
             Console.WriteLine($"I'm thinking of a number between 1 and {guess.FindThisNumber}. Can you guess it?");
         }
