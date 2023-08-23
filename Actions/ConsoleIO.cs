@@ -14,7 +14,7 @@ namespace TheGuessGame.Actions
         {
             bool foundAnswer;
 
-            Console.WriteLine($"I'm thinking of a number between 1 and {guess.MaxNumber}. Can you guess it?");
+            Console.WriteLine($"\nI'm thinking of a number between 1 and {guess.MaxNumber}. Can you guess it?");
             do
             {
                 foundAnswer = FindCorrectAnswer("Enter your guess: ", guess);
