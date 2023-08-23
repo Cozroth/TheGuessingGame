@@ -12,9 +12,18 @@ namespace TheGuessGame.Actions
 
         public static void StartGame(Guesses guess)
         {
-            Console.WriteLine($"I'm thinking of a number between 1 and {guess.FindThisNumber}. Can you guess it?");
-        }
+            bool foundAnswer;
 
+            Console.WriteLine($"I'm thinking of a number between 1 and {guess.MaxNumber}. Can you guess it?");
+            do
+            {
+                foundAnswer = FindCorrectAnswer("Enter your guess: ", guess);
+
+            } while (!foundAnswer);
+
+            GuessStatistics(guess);
+
+        }
         public static void GuessStatistics(Guesses guess)
         {
             Console.WriteLine("============================");
@@ -24,36 +33,58 @@ namespace TheGuessGame.Actions
             Console.WriteLine($"Amount of too low guesses: {guess.LowGuesses}");
             Console.WriteLine("============================");
         }
-        public static string GetRequiredString(string prompt)
+        public static bool GetRequiredBool(string prompt)
         {
-            string validString;
+            string keepPlaying;
             do
             {
                 Console.Write(prompt);
-                validString = Console.ReadLine();
-                if (!string.IsNullOrEmpty(validString.Trim()))
+                keepPlaying = Console.ReadLine();
+                if (keepPlaying.ToLower() == "yes")
                 {
-                    return validString;
+                    return true;
+                }
+                else if(keepPlaying.ToLower() == "no")
+                {
+                    return false;
                 }
 
-                Console.WriteLine("You must enter atleast one character.");
+                Console.WriteLine("You must enter yes or no.");
 
             } while (true);
         }
-        public static int GetRequiredRange(string prompt, int min, int max)
+        
+        public static bool FindCorrectAnswer(string prompt, Guesses guess)
         {
-            int validRange;
+            int validGuess;
             do
             {
                 Console.Write(prompt);
-                if (int.TryParse(Console.ReadLine(), out validRange))
+                if (int.TryParse(Console.ReadLine(), out validGuess))
                 {
-                    if (validRange >= min && validRange <= max)
+                    if (validGuess <= guess.MaxNumber)
                     {
-                        return validRange;
+                        if (validGuess < guess.FindThisNumber)
+                        {
+                            Console.WriteLine("Higher...\n");
+                            guess.AmountOfGuesses += 1;
+                            guess.LowGuesses += 1;
+                        }
+                        if (validGuess > guess.FindThisNumber)
+                        {
+                            Console.WriteLine("Lower...\n");
+                            guess.AmountOfGuesses += 1;
+                            guess.HighGuesses += 1;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You got it!");
+                            guess.AmountOfGuesses += 1;
+                            return true;
+                        }
                     }
                 }
-                Console.WriteLine($"You must enter a numerical value in the range of {min} and {max}.");
+                Console.WriteLine($"You must enter a number between 1 and {guess.MaxNumber}");
 
             } while (true);
         }

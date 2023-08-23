@@ -5,13 +5,18 @@ namespace TheGuessGame.Workflow
 {
     public static class App
     {
-        public static GuessHandler _handler = new GuessHandler();
         public static void Run()
         {
-            ConsoleIO.Welcome();
-            
-            _handler.NewGame();
+            GuessHandler _handler = new GuessHandler();
+            bool keepPlaying;
+            do
+            {
+                _handler.NewGame();
+
+                keepPlaying = ConsoleIO.GetRequiredBool("Would you like to play again? (yes/no): ");
+            } while (keepPlaying);
 
         }
     }
 }
+
