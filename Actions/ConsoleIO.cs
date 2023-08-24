@@ -27,7 +27,7 @@ namespace TheGuessGame.Actions
         }
         public static void GuessStatistics(Guesses guess)
         {
-            Console.WriteLine("============================");
+            Console.WriteLine("\n============================");
             Console.WriteLine($"I was thinking of: {guess.FindThisNumber}.");
             Console.WriteLine($"Total amount of guesses: {guess.AmountOfGuesses}.");
             Console.WriteLine($"Amount of too high guesses: {guess.HighGuesses}");
