@@ -27,12 +27,12 @@ namespace TheGuessGame.Actions
         }
         public static void GuessStatistics(Guesses guess)
         {
-            Console.WriteLine("\n============================");
+            Console.WriteLine("\n=====================================");
             Console.WriteLine($"I was thinking of: {guess.FindThisNumber}.");
             Console.WriteLine($"Total amount of guesses: {guess.AmountOfGuesses}.");
             Console.WriteLine($"Amount of too high guesses: {guess.HighGuesses}");
             Console.WriteLine($"Amount of too low guesses: {guess.LowGuesses}");
-            Console.WriteLine("============================");
+            Console.WriteLine ("=====================================");
         }
         public static bool GetRequiredBool(string prompt)
         {
@@ -86,7 +86,10 @@ namespace TheGuessGame.Actions
 
                     }
                 }
-                Console.WriteLine($"You must enter a number between 1 and {guess.MaxNumber}");
+                else
+                {
+                    Console.WriteLine($"You must enter a number between 1 and {guess.MaxNumber}");
+                }
 
             } while (true);
         }
