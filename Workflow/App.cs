@@ -12,7 +12,6 @@ namespace TheGuessGame.Workflow
             do
             {
                 _handler.NewGame();
-
                 keepPlaying = ConsoleIO.GetRequiredBool("\nWould you like to play again? (yes/no): ");
             } while (keepPlaying);
 

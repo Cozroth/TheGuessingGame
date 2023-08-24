@@ -7,6 +7,7 @@ namespace TheGuessGame.Actions
 
         public static void Welcome()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to the Guessing Game!");
         }
 
@@ -44,7 +45,7 @@ namespace TheGuessGame.Actions
                 {
                     return true;
                 }
-                else if(keepPlaying.ToLower() == "no")
+                else if (keepPlaying.ToLower() == "no")
                 {
                     return false;
                 }
@@ -53,7 +54,7 @@ namespace TheGuessGame.Actions
 
             } while (true);
         }
-        
+
         public static bool FindCorrectAnswer(string prompt, Guesses guess)
         {
             int validGuess;
@@ -64,6 +65,12 @@ namespace TheGuessGame.Actions
                 {
                     if (validGuess <= guess.MaxNumber)
                     {
+                        if (validGuess == guess.FindThisNumber)
+                        {
+                            Console.WriteLine("You got it!");
+                            guess.AmountOfGuesses += 1;
+                            return true;
+                        }
                         if (validGuess < guess.FindThisNumber)
                         {
                             Console.WriteLine("Higher...\n");
@@ -76,12 +83,7 @@ namespace TheGuessGame.Actions
                             guess.AmountOfGuesses += 1;
                             guess.HighGuesses += 1;
                         }
-                        else
-                        {
-                            Console.WriteLine("You got it!");
-                            guess.AmountOfGuesses += 1;
-                            return true;
-                        }
+
                     }
                 }
                 Console.WriteLine($"You must enter a number between 1 and {guess.MaxNumber}");
